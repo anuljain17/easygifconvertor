@@ -41,7 +41,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 });
 
 // Start the server
-const port = 3001;
+const port = process.env.port || 8080;
 app.listen(port, () => {
 	console.log(`Server listening on port ${port}`);
 });
