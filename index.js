@@ -18,8 +18,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 
 	const { path } = file;
 
-	const outputfile =
-		file.originalname.substring(0, file.originalname.length - 4) + ".gif";
+	const outputfile = Date.now() + ".gif";
 	console.log("received conversion request for file:" + path);
 	// Execute the ffmpeg command to convert the file
 	exec(
