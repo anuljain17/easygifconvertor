@@ -31,6 +31,11 @@ jobs:
         with:
           name: node-app
           path: .
+  
+      - name: Install the dependency for ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
 
   deploy:
     runs-on: ubuntu-latest
