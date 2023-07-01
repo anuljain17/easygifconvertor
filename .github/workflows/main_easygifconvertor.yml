@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: "18.x"
+          node-version: "14.x"
 
       - name: npm install, build, and test
         run: |
@@ -59,20 +59,20 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3E1F808850FD4CE2A025FEEAE1FEC766 }}
           package: .
 
-  - job: Deploy
+  deploy-azure-app-service:
     displayName: Deploy to Azure App Service
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: "ubuntu-latest"
     steps:
       - checkout: self
 
       # Install FFmpeg on App Service VMs
       - task: AzureCLI@2
-        displayName: 'Install FFmpeg'
+        displayName: "Install FFmpeg"
         inputs:
-          azureSubscription: 'Visual Studio Enterprise Subscription'
-          scriptType: 'bash'
-          scriptLocation: 'inlineScript'
+          azureSubscription: "Visual Studio Enterprise Subscription"
+          scriptType: "bash"
+          scriptLocation: "inlineScript"
           inlineScript: |
             echo 'Installing FFmpeg...'
             az webapp deployment source config-zip --resource-group 'DefaultResourceGroup-EUS' --name 'easygifconvertor' --src .deployment
