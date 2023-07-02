@@ -55,23 +55,3 @@ jobs:
           slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3E1F808850FD4CE2A025FEEAE1FEC766 }}
           package: .
-
-  deploy-azure-app-service:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: "Install az cli"
-        run: |
-          echo 'Installing FFmpeg...'
-          curl https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb --output packages-microsoft-prod.deb
-          sudo dpkg -i packages-microsoft-prod.deb
-          sudo apt-get update
-          sudo apt-get install -y azure-cli
-
-      - name: "executing script"
-        run: |
-          echo 'Installing FFmpeg...'
-          az webapp deployment source config-zip --resource-group 'DefaultResourceGroup-EUS' --name 'easygifconvertor' --src .deployment
